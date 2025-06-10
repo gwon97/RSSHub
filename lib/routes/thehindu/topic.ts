@@ -5,9 +5,9 @@ import { load } from 'cheerio';
 import { parseDate } from '@/utils/parse-date';
 
 export const route: Route = {
-    path: '/topic/:topic',
+    path: '/news/:topic',
     categories: ['traditional-media'],
-    example: '/thehindu/topic/rains',
+    example: '/thehindu/news/rains',
     parameters: { topic: 'Topic slug, can be found in URL.' },
     features: {
         requireConfig: false,
@@ -19,7 +19,7 @@ export const route: Route = {
     },
     radar: [
         {
-            source: ['thehindu.com/topic/:topic'],
+            source: ['thehindu.com/news/:topic'],
         },
     ],
     name: 'Topic',
@@ -30,8 +30,8 @@ export const route: Route = {
 async function handler(ctx) {
     const baseUrl = 'https://www.thehindu.com';
     const topic = ctx.req.param('topic');
-    const link = `${baseUrl}/topic/${topic}/`;
-    const apiLink = `${baseUrl}/topic/${topic}/fragment/showmoreTag`;
+    const link = `${baseUrl}/news/${topic}/`;
+    const apiLink = `${baseUrl}/news/${topic}/fragment/showmoreTag`;
 
     const { data: response } = await got(link);
     const { data: apiResponse } = await got(apiLink);
